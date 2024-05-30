@@ -1,5 +1,14 @@
-import styles from './page.module.css'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
-  return <main></main>
+const Home = async () => {
+  const session = await getServerSession()
+
+  if (!session) {
+    return redirect('/api/auth/signin')
+  }
+
+  return <main>Main Page</main>
 }
+
+export default Home
